@@ -1,0 +1,11 @@
+[Unit]
+Description=Teleport Service
+After=network.target
+
+[Service]
+Type=simple
+Restart=always
+ExecStart={{ teleport_basedir }}/teleport start --config={{ teleport_basedir }}/teleport.yaml {{ teleport_opts | default('') }}
+
+[Install]
+WantedBy=multi-user.target

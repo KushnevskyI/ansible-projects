@@ -1,0 +1,36 @@
+#jinja2: trim_blocks: False
+---
+{%- if teleport_auth_connectors is defined %}
+{%- for item in teleport_auth_connectors %}
+{%- if item.kind == "oidc" %}
+kind: oidc
+version: v2
+metadata:
+  name: {{ item.name }}
+spec:
+  redirect_url: "{{ item.redirect_url }}"
+  client_id: {{ item.client_id }}
+  display: {{ item.display }}
+  client_secret: {{ item.client_secret }}
+  issuer_url: {{ item.issuer_url }}
+  scope: ["{{ item.scope }}"]
+  claims_to_roles:
+    {%- for maping_to_role in item.claims_to_roles %}
+    - {{ maping_to_role }}
+    {%- endfor %}
+{%- endif %}
+{%- if item.kind == "saml" %}
+kind: saml
+version: v2
+metadata:
+  name: {{ item.name }}
+spec:
+  {{ item.spec }}
+{# Темплейт для SAML возможно не пригодится, оставлен задел без декомпозиции на переменные #}
+{%- endif %}
+{%- endfor %}
+{%- endif %}
+
+
+
+

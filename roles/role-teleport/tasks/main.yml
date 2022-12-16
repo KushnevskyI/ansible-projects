@@ -1,0 +1,82 @@
+---
+- name: Install Teleport | Creates directories
+  file:
+    path: "{{ item }}"
+    state: directory
+  with_items:
+    - "{{ teleport_basedir }}"
+    - "{{ teleport_basedir }}/logs"
+    - "{{ teleport_basedir }}/webcerts"
+    - "{{ teleport_basedir }}/releases"
+
+- name: Install Teleport | download release
+  get_url:
+    url: "{{ teleport_release_url }}"
+    dest: "{{ teleport_basedir }}/releases/"
+    url_username: "{{ teleport_http_username }}"
+    url_password: "{{ teleport_http_password }}"
+  register: http_result
+
+- name: Install Teleport | unarchive release 
+  unarchive:
+    src: "{{ http_result.dest }}"
+    dest: "{{ teleport_basedir }}"
+    remote_src: true
+  notify: "restart teleport"
+
+- name: Install Teleport | Create teleport service (systemd).
+  template:
+    src: "teleport.service.j2"
+    dest: "/etc/systemd/system/teleport.service"
+    owner: "root"
+    group: "root"
+    mode: 0644
+  become: true
+  register: service_installed
+
+- name: Install Teleport | systemctl daemon-reload
+  shell: systemctl daemon-reload
+  become: true
+  when: service_installed.changed
+
+- name: Configure Teleport | base service
+  template: 
+    src: teleport.yaml.j2
+    dest: "{{ teleport_basedir }}/teleport.yaml"
+  notify: "restart teleport"
+
+- name: Configure Teleport | make ssl certs
+  block:
+    - name: Configure Teleport | make ssl key
+      copy:
+        content: "{{teleport_proxy_https_key}}"
+        dest: "{{teleport_proxy_https_key_file}}"
+      notify: "restart teleport"
+    - name: Configure Teleport | make ssl cert
+      copy:
+        content: "{{teleport_proxy_https_cert}}"
+        dest: "{{teleport_proxy_https_cert_file}}"
+      notify: "restart teleport"
+  when: teleport_proxy_https_key is defined and teleport_proxy_https_cert is defined
+
+
+- name: Configure Teleport | make auth connectors manifest
+  template: 
+    src: connectors.yaml.j2
+    dest: "{{ teleport_basedir }}/auth-connectors.yaml"
+  notify: "connectors changed"
+
+
+- name: Configure Teleport | make app manifest
+  template: 
+    src: apps.yaml.j2
+    dest: "{{ teleport_basedir }}/apps.yaml"
+  notify: "apps changed"
+
+
+- name: Configure Teleport | make roles manifest
+  template: 
+    src: roles.yaml.j2
+    dest: "{{ teleport_basedir }}/roles.yaml"
+  notify: "roles changed"
+

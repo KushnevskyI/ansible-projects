@@ -1,0 +1,133 @@
+---
+teleport_release_url: http://192.168.0.128/teleport.tar.gz
+teleport_http_username: ""
+teleport_http_password: ""
+
+teleport_nodename: testnode
+teleport_basedir: /opt/teleport
+teleport_log_out: /opt/teleport/logs/logfile.log
+teleport_loglevel: INFO
+teleport_capin: ""
+teleport_auth_enabled: true
+teleport_auth_listen_address: 0.0.0.0:3025
+teleport_auth_cluster_name: mycluster
+teleport_auth_tokens_node:
+  - f7adb7ccdf04037bcd2b52ec6010fd6f0caec94ba190b765
+teleport_auth_tokens_proxy:
+  - f7adb7ccdf04037bcd2b52ec6010fd6f0caec94ba190b765
+teleport_auth_tokens_auth:
+  - f7adb7ccdf04037bcd2b52ec6010fd6f0caec94ba190b765  
+teleport_ssh_enabled: true
+teleport_ssh_listen_address: 0.0.0.0:3022
+teleport_proxy_enabled: true
+teleport_proxy_listen_address: 0.0.0.0:3023
+teleport_proxy_web_listen_address: 0.0.0.0:3080
+teleport_proxy_tunnel_listen_address: 0.0.0.0:3024
+
+teleport_proxy_https_key_file: /opt/teleport/webcerts/key.pem
+teleport_proxy_https_cert_file: /opt/teleport/webcerts/cert.pem
+
+# teleport_proxy_https_key и teleport_proxy_https_cert заданы тут только в тестовых целях, используй vault!
+teleport_proxy_https_key: |
+    -----BEGIN PRIVATE KEY-----
+    MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDfYG6fC/MSrvus
+    GGpAybDqq9DPmIfnUVqBfkjzA7GQNllU8IixRXL4Nez1tewraXvkqtCd6EfaGpCp
+    3r0olH5tF5mh4aTUcYmHA16ydKqhaLvTBnZ0G/3WngVFEeG1xFG8NxDrgGsckC54
+    /48pKwnF9BF0Y7Vo7ZhIz1Lw3DaZ+dBgkBJotDhlnip6E+qFQXLaITGbrSbVIvvR
+    hZvqJKHwiAu7LyXslX39rXk0ooyh6/E/+Uh/9TXiIT3pFIxAvfT7DOaetseyif58
+    7Lu1w58YMS3qXJ4VDJnI2ca0qre3izrC4B5/wRc14EcNR3o5BXTq+Gdv/+t0pwuY
+    8cX/PvgvAgMBAAECggEAb/WVfIIwwxyRaCCUoQR2eCjF8EczVu2fv2fciHFBfla/
+    T6N/39o/Vckxi7YzOU8VmfdDuOHDob3O5FWP2dcTxvodNtYyF4kQtWsq+6ceHuiv
+    u4VxuaCOChQJ8CSWTNSpYvz2rhMfnKFnqZ3t02SO8XjzhrKzKnRr75J6r96wP1vW
+    tB3axhevP/Lli5+1xSSPAc4apMY8ZeI2EANeQ23Lo3n+gEkeImf5KXoNbHkW+TyQ
+    QztA0LytQmjdqfNkQ6F/KXV3X5ihHRILEQ+vCLeFDgc8SAOjEGm5cNq8C7t47TKC
+    GVaxgFUfIinE5jRYVSzHUtUO5xq2iZlNhRIWw75TAQKBgQD+siJvCueNQFA2BYnc
+    nY99HZ2Whn7B5vyAdGX0mK1Zk6icnlg2V/Z5xEeutxWJ/Xgm6s3KVn27qGWKcUjm
+    UejRqSgR0PAXXqfui9QHQLx2wJKboT5VCY6W4AIr6jc0Wv2tYBABnoV89uzweYkm
+    tdOSqOmQM/uGL8GNGH59MeWAKQKBgQDghT5DMgMebfw8inHaPkcwK0Qp1jP/FZCh
+    IRJTGILDDaWvQDGaEwPOGFQHyjAV088eQSD8onDiWnr7xPlM+GOkqyPLyUl9KHbi
+    pzFk1f1y3fIJgBwURGDhaJ9kH680vFrOgmrGiSVpLwt5Xg1lBTZmcDk5RmqqEUYT
+    5lRkcGlglwKBgDGH4OxpWXh9vluTHilaNtJlFQV16Ga7DfXJLR6xJl0aOxsiLBN9
+    bcBmbG5MypKISXqABT9JLLB24jBXMY8g9L75P4KfeGGDFfNtG/HBJCWP87LyW5Xc
+    Au/SZnm11cCHxXeXC+XUty8DMjbd2888YwXNdYaGpW6GEQToc4jTUEdpAoGATSIZ
+    gNZGsgaRGG9rq9GnfUnv8fuQA3tyI5kMBZYvHjmrCSkhoVAVB5HeFIsGuAj7Z+Zy
+    Ibjg1TLGe4ZxK1tOSD0vYAx3/dKP/U/5LS5DE1pik5b6jo/rRKU/1RL5i0GGZNnz
+    Ot/VBWzPIVQJgAIpbUnyrtWdQW4LyDxiE9t2qGMCgYEA56xFjIoOzq3TtIN/UOox
+    YOmm2Zrz5VN3vvQWFrIPNUl7rOQwmV4RLKKzjc/k/WVZHMhbBv5nE0Mykmbj9zUu
+    jze+OledUNy8qdb3OA7fLF1YxqA5E/OmElRoLsfYPCcmgbMaKfFk61lammNGvNsC
+    TjGVf6CrW3arrgojERfMQVI=
+    -----END PRIVATE KEY-----
+teleport_proxy_https_cert: |
+    -----BEGIN CERTIFICATE-----
+    MIID3DCCAsSgAwIBAgIUMq1UXL9FQLHGYiZ9R8TiD4NZ91QwDQYJKoZIhvcNAQEL
+    BQAwgYAxCzAJBgNVBAYTAlJVMQwwCgYDVQQIDANNU0sxFTATBgNVBAcMDERlZmF1
+    bHQgQ2l0eTEWMBQGA1UECgwNU2hpdEhhbmRzIExURDEcMBoGA1UECwwTU2hpdGll
+    c3QgSGFuZHMgZXZlcjEWMBQGA1UEAwwNdGVsZXBvcnQtY29zODAeFw0yMjA0MDQx
+    MzEwMzVaFw0yMzA0MDQxMzEwMzVaMIGAMQswCQYDVQQGEwJSVTEMMAoGA1UECAwD
+    TVNLMRUwEwYDVQQHDAxEZWZhdWx0IENpdHkxFjAUBgNVBAoMDVNoaXRIYW5kcyBM
+    VEQxHDAaBgNVBAsME1NoaXRpZXN0IEhhbmRzIGV2ZXIxFjAUBgNVBAMMDXRlbGVw
+    b3J0LWNvczgwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDfYG6fC/MS
+    rvusGGpAybDqq9DPmIfnUVqBfkjzA7GQNllU8IixRXL4Nez1tewraXvkqtCd6Efa
+    GpCp3r0olH5tF5mh4aTUcYmHA16ydKqhaLvTBnZ0G/3WngVFEeG1xFG8NxDrgGsc
+    kC54/48pKwnF9BF0Y7Vo7ZhIz1Lw3DaZ+dBgkBJotDhlnip6E+qFQXLaITGbrSbV
+    IvvRhZvqJKHwiAu7LyXslX39rXk0ooyh6/E/+Uh/9TXiIT3pFIxAvfT7DOaetsey
+    if587Lu1w58YMS3qXJ4VDJnI2ca0qre3izrC4B5/wRc14EcNR3o5BXTq+Gdv/+t0
+    pwuY8cX/PvgvAgMBAAGjTDBKMAsGA1UdDwQEAwIEMDATBgNVHSUEDDAKBggrBgEF
+    BQcDATAmBgNVHREEHzAdgg10ZWxlcG9ydC1jb3M4ggwxOTIuMTY4LjAuNzAwDQYJ
+    KoZIhvcNAQELBQADggEBAGKuzOUqe9AggkF3ae5gpDogoYPMzNYSLMJGEJmUqQo4
+    UJrb/R1xk1AzBNLJ+FOTXTyYqQrmwx+5r0CKT5SmXk4mHoZaTe9Ecub1zP4i7cir
+    gHGzAVQXC4tLxOs6j/finAsie/JfUK/Xd0lKBwNvkJYvErYDAIvekVi84NuBE/mK
+    hpSWSu7+7gup0wbAp0+bTlcS4KZyqsb6itJ/53dtiX3w6LrSBVSFru/hHn2SEXmT
+    61jXX4NaVGnvGQoIGGR6Pi51wchuYnRWMOgn8tC030l+k6gLZbBGIE+prhU6QEI8
+    sISRLlw4wgyhNumAnhEacc4ZexKWYTC+II/7OWli5sU=
+    -----END CERTIFICATE-----
+
+
+
+teleport_app_enabled: true
+teleport_app_service_debug: yes
+
+
+teleport_auth_connectors:
+  - 
+    kind: oidc
+    name: testoidc
+    client_id: teleport
+    display: dex oidc
+    client_secret: ZXhhbXBsZS1hcHAtc2VjcmV0
+    issuer_url: http://keycloak:5556/dex
+    redirect_url: https://teleport-cos8:3080/v1/webapi/oidc/callback
+    scope: groups
+    claims_to_roles:
+      - '{claim: "groups", value: "developers", roles: ["developer-exec"]}'
+
+
+teleport_apps: 
+  - 
+    name: testapp
+    description: testapp description
+    labels:
+      - 'env: test'
+      - 'appclass: monitoring'
+    uri: http://localhost:8888
+    public_addr: mon.teleport
+  - 
+    name: testapp2
+    description: testapp2 description
+    labels:
+      - 'env: test'
+      - 'appclass: management'
+    uri: http://localhost:8889
+    public_addr: mng.teleport
+
+teleport_roles:
+  - 
+    description: some dev team
+    name: devops-devteam1
+    allow:
+      -
+        k8s_labels:
+          - "'*': '*'"
+        k8s_groups:
+          - developers-exec
+          - cluster-admins

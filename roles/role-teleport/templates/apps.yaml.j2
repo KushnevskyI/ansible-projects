@@ -1,0 +1,18 @@
+#jinja2: trim_blocks: False
+---
+{%- if teleport_apps is defined %}
+{%- for item in teleport_apps %}
+kind: app
+version: v3
+metadata:
+  name: {{ item.name }}
+  description: "{{ item.description }}"
+  labels:
+    {%- for label in item.labels %}
+    {{ label }}
+    {%- endfor %}
+spec:
+  uri: {{ item.uri }}
+  public_addr: {{ item.public_addr }}
+{%- endfor %}
+{%- endif %}

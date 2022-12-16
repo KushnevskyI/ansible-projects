@@ -1,0 +1,147 @@
+#jinja2: trim_blocks: False
+---
+{%- if teleport_roles is defined %}
+{%- for item in teleport_roles %}
+kind: role
+version: v5
+metadata:
+  description: {{ item.description }}
+  name: {{ item.name }}
+spec:
+  {%- if item.allow is defined %}
+  allow:
+   {%- for item_allow in item.allow %}
+{# Allow labels #}
+    {%- if item_allow.app_labels is defined %}
+    app_labels:
+      {%- for label in item_allow.app_labels %}
+        {{ label }}
+      {%- endfor %}
+    {%- endif %}
+    {%- if item_allow.db_labels is defined %}
+    db_labels:
+      {%- for label in item_allow.db_labels %}
+        {{ label }}
+      {%- endfor %}
+    {%- endif %}
+    {%- if item_allow.k8s_labels is defined %}
+    kubernetes_labels:   
+      {%- for label in item_allow.k8s_labels %}
+        {{ label }}
+      {%- endfor %}
+    {%- endif %}
+    {%- if item_allow.node_labels is defined %}
+    node_labels:   
+      {%- for label in item_allow.node_labels %}
+        {{ label }}
+      {%- endfor %}
+    {%- endif %}
+{# Allow logins, groups, usernames #}
+    {%- if item_allow.k8s_users is defined %}
+    kubernetes_users:
+    {%- for user in item_allow.k8s_users %}
+    - {{ user }}
+    {%- endfor %}
+    {%- endif %}
+    {%- if item_allow.k8s_groups is defined %}
+    kubernetes_groups:
+    {%- for group in item_allow.k8s_groups %}
+    - {{ group }}
+    {%- endfor %}
+    {%- endif %}
+    {%- if item_allow.db_users is defined %}
+    db_users:   
+    {%- for user in item_allow.db_users %}
+    - {{ user }}
+    {%- endfor %}
+    {%- endif %}
+    {%- if item_allow.logins is defined %}
+    logins:   
+    {%- for login in item_allow.logins %}
+    - {{ login }}
+    {%- endfor %}
+    {%- endif %}
+  {%- if item_allow.rules is defined %}
+  rules:
+  {%- for resources in item_allow.rules %}
+  - resources:
+    - {{ resources.name }}
+  verbs:
+    {%- for verb in resources.verbs %}
+    - {{ verb }}
+    {%- endfor %}
+  {%- endfor %}
+  {%- endif %}
+  {%- endfor %}
+  {%- else %}
+  allow: {}
+  {%- endif %}
+
+  {%- if item.deny is defined %}
+  deny:
+{# deny labels #}
+    {%- if item.deny.app_labels is defined %}
+    app_labels:
+      {%- for label in item.deny.app_labels %}
+        {{ label }}
+      {%- endfor %}
+    {%- endif %}
+    {%- if item.deny.db_labels is defined %}
+    db_labels:
+      {%- for label in item.deny.db_labels %}
+        {{ label }}
+      {%- endfor %}
+    {%- endif %}
+    {%- if item.deny.k8s_labels is defined %}
+    kubernetes_labels:   
+      {%- for label in item.deny.k8s_labels %}
+        {{ label }}
+      {%- endfor %}
+    {%- endif %}
+    {%- if item.deny.node_labels is defined %}
+    node_labels:   
+      {%- for label in item.deny.node_labels %}
+        {{ label }}
+      {%- endfor %}
+    {%- endif %}
+{# deny logins, groups, usernames #}
+    {%- if item.deny.k8s_users is defined %}
+    kubernetes_users:
+    {%- for user in item.deny.k8s_users %}
+    - {{ user }}
+    {%- endfor %}
+    {%- endif %}
+    {%- if item.deny.k8s_groups is defined %}
+    kubernetes_groups:
+    {%- for group in item.deny.k8s_groups %}
+    - {{ group }}
+    {%- endfor %}
+    {%- endif %}
+    {%- if item.deny.db_users is defined %}
+    db_users:   
+    {%- for user in item.deny.db_users %}
+    - {{ user }}
+    {%- endfor %}
+    {%- endif %}
+    {%- if item.deny.logins is defined %}
+    logins:   
+    {%- for login in item.deny.logins %}
+    - {{ login }}
+    {%- endfor %}
+    {%- endif %}
+  {%- if item.deny.rules is defined %}
+  rules:
+  {%- for resources in item.deny.rules %}
+  - resources:
+    - {{ resources.name }}
+  verbs:
+    {%- for verb in resources.verbs %}
+    - {{ verb }}
+    {%- endfor %}
+  {%- endfor %}
+  {%- endif %}
+  {%- else %}
+  deny: {}
+  {%- endif %}
+{%- endfor %}
+{%- endif %}

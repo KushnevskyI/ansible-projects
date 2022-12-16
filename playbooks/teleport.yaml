@@ -1,0 +1,6 @@
+---
+- hosts: teleport
+  become: true
+  roles:
+    - role: roles/role-teleport
+  tasks:

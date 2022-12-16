@@ -1,0 +1,25 @@
+
+- name: restart teleport
+  service:
+    name: "teleport"
+    state: "restarted"
+    enabled: true
+- name: wait while teleport started
+  wait_for:
+    path: "{{ teleport_log_out }}"
+    search_regex: All applications successfully started
+  listen: restart teleport
+
+
+
+- name: roles changed
+  command: "{{teleport_basedir}}/tctl -c {{teleport_basedir}}/teleport.yaml create -f {{ teleport_basedir }}/roles.yaml"
+  listen: roles changed
+
+- name: apps changed
+  command: "{{teleport_basedir}}/tctl -c {{teleport_basedir}}/teleport.yaml create -f {{ teleport_basedir }}/apps.yaml"
+  listen: apps changed
+
+- name: connectors changed
+  command: "{{teleport_basedir}}/tctl -c {{teleport_basedir}}/teleport.yaml create -f {{ teleport_basedir }}/auth-connectors.yaml"
+  listen:  apps changed
